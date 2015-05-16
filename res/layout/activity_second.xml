@@ -15,53 +15,53 @@
         android:text="@string/info"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <ImageView
+        android:id="@+id/imgAvatar"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignBottom="@+id/editText3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/editText1"
+        android:src="@drawable/defautl_avatar" />
+
     <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
-        android:layout_toRightOf="@+id/button3"
+        android:layout_toRightOf="@+id/imgAvatar"
         android:ems="10"
-        android:hint="@string/id" >
-
-        <requestFocus />
-    </EditText>
+        android:hint="@string/id" />
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/editText1"
+        android:layout_toRightOf="@+id/imgAvatar"
         android:ems="10"
-        android:hint="@string/name" />
+        android:hint="@string/name" >
+
+        <requestFocus />
+    </EditText>
 
     <EditText
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/editText2"
+        android:layout_toRightOf="@+id/imgAvatar"
         android:ems="10"
         android:hint="@string/email" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/LinearLayout1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/editText1"
-        android:text="Button" />
 
     <LinearLayout
         android:id="@+id/LinearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText3"
+        android:layout_below="@+id/imgAvatar"
         android:layout_centerHorizontal="true" >
 
         <Button
@@ -77,7 +77,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/save" />
-
     </LinearLayout>
 
 </RelativeLayout>

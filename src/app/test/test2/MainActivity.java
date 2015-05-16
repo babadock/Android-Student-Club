@@ -16,6 +16,7 @@ public class MainActivity extends ActionBarActivity {
 	public static final String NAME = "app.test.test2.name";
 	public static final String ID = "app.test.test2.id";
 	public static final String EMAIL = "app.test.test2.email";
+	public static final String AVATAR = "app.test.test2.avatar";
 
 	protected static final String TAG = "From Main Activity";
 	protected static final int REQUEST_CODE = 0;
@@ -27,36 +28,12 @@ public class MainActivity extends ActionBarActivity {
 
 	StudentAdapter adapter;
 
-	/**
-	 * 1. how to use onActivityResult to get value pass between two activity ???
-	 */
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK) {
-			if (requestCode == 100) {
-				// Sign up
-				Log.i(TAG, "requestCode == 100");
-			} else {
-				// Edit info
-				Log.i(TAG, "requestCode == 200");
-			}
-		}
-	}
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		initListview();
-		Student newStudent = new Student();
-		newStudent.setName("Tran Trung Vi");
-		newStudent.setId("51104279");
-		mStudents.add(newStudent);
-
-		newStudent.setName("Tran Trung Vi");
-		newStudent.setId("51104279");
-		mStudents.add(newStudent);
 
 		adapter = new StudentAdapter(this, mStudents);
 		listView = (ListView) findViewById(R.id.listView1);
@@ -89,6 +66,26 @@ public class MainActivity extends ActionBarActivity {
 				startActivityForResult(signup, 100);
 			}
 		});
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK) {
+			if (requestCode == 100) {
+				// Sign up
+				Log.i(TAG, "requestCode == 100");
+				Student newStudent = new Student();
+				newStudent.setName(data.getStringExtra(NAME));
+				newStudent.setAvatar(data.getStringExtra(AVATAR));
+				// student.setName(data.getStringExtra(name));
+				mStudents.add(0, newStudent);
+				Log.i(TAG, "add success");
+			} else {
+				// Edit info
+				Log.i(TAG, "requestCode == 200");
+			}
+		}
+		adapter.notifyDataSetChanged();
 	}
 
 	private void initListview() {

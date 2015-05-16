@@ -55,6 +55,8 @@ public class StudentAdapter extends BaseAdapter {
 			holder = (ViewHolder) view.getTag();
 		}
 		Student student = mStudents.get(position);
+		
+		//holder.avatar.setImageBitmap(student.getAvatar());
 		holder.name.setText(student.getName());
 		return view;
 	}

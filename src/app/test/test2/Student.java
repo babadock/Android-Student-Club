@@ -6,7 +6,7 @@ public class Student {
 	private String id;
 	private String name;
 	private String email;
-	private Bitmap avatar;
+	private String avatar;
 	private String token;
 
 	public String getId() {
@@ -33,11 +33,11 @@ public class Student {
 		this.email = email;
 	}
 
-	public Bitmap getAvatar() {
+	public String getAvatar() {
 		return avatar;
 	}
 
-	public void setAvatar(Bitmap avatar) {
+	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
 
