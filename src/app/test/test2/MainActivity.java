@@ -12,6 +12,15 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.androidquery.AQuery;
+import com.androidquery.callback.AjaxCallback;
+import com.androidquery.callback.AjaxStatus;
+import com.androidquery.callback.BitmapAjaxCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends ActionBarActivity {
 
 	protected static final String TAG = "From Main Activity";
@@ -21,6 +30,10 @@ public class MainActivity extends ActionBarActivity {
 	private List<Student> mStudents;
 	private Button addnewBtn;
 	private ListView listView;
+
+	AQuery aQuery = new AQuery(this);
+	String urlClass = "http://api.routine.geekup.vn/class";
+	String urlLeave = "http://api.routine.geekup.vn/class/leave";
 
 	StudentAdapter adapter;
 
@@ -100,5 +113,38 @@ public class MainActivity extends ActionBarActivity {
 
 	private void initListview() {
 		mStudents = new ArrayList<Student>();
+		aQuery.ajax(urlClass, JSONObject.class, new AjaxCallback<JSONObject>() {
+			@Override
+			public void callback(String url, JSONObject object,
+					AjaxStatus status) {
+				// TODO Auto-generated method stub
+				if (object != null) {
+					try {
+						JSONArray array = object.getJSONArray("students");
+						for (int i = 0; i < array.length(); i++) {
+							JSONObject student = array.getJSONObject(i);
+							String avatar = student.getString("avatar");
+							String name = student.getString("name");
+							String email = student.getString("email");
+							String student_id = student.getString("student_id");
+							String id = student.getString("id");
+							addPersonWith(id, student_id, name, email, avatar, null);
+						}
+					} catch (JSONException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+	}
+
+	protected void addPersonWith(String id, String student_id, String name,
+			String email, String avatar, Object object) {
+		// TODO Auto-generated method stub
+		Student student = new Student();
+		student.setId(id);
+		student.setName(name);
+		student.set
+		
 	}
 }

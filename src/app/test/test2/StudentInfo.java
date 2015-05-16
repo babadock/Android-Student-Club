@@ -66,7 +66,9 @@ public class StudentInfo extends Activity {
 			emailEditText.setCursorVisible(false);
 			emailEditText.setPressed(false);
 			emailEditText.setFocusable(false);
-
+			
+			//imgAvatar.setKeyListener(null);
+			
 			idEditText.setText(data.getStringExtra("id"));
 			nameEditText.setText(data.getStringExtra("name"));
 			emailEditText.setText(data.getStringExtra("email"));
