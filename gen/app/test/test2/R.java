@@ -1647,7 +1647,8 @@ containing a value of this type.
         public static final int abc_textfield_search_activated_mtrl_alpha=0x7f020034;
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f020035;
         public static final int abc_textfield_search_material=0x7f020036;
-        public static final int ic_launcher=0x7f020037;
+        public static final int defautl_avatar=0x7f020037;
+        public static final int ic_launcher=0x7f020038;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f050047;
@@ -1665,18 +1666,16 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f05002e;
         public static final int action_mode_bar_stub=0x7f05002d;
         public static final int action_mode_close_button=0x7f050020;
-        public static final int action_settings=0x7f05004d;
+        public static final int action_settings=0x7f05004b;
         public static final int activity_chooser_view_content=0x7f050021;
         public static final int always=0x7f05000d;
+        public static final int avatar=0x7f050049;
         public static final int beginning=0x7f050012;
         public static final int button1=0x7f05003f;
         public static final int button2=0x7f050048;
         public static final int button3=0x7f050044;
         public static final int checkbox=0x7f050029;
         public static final int collapseActionView=0x7f05000f;
-        public static final int crime_list_item_dateTextView=0x7f05004c;
-        public static final int crime_list_item_solvedCheckBox=0x7f05004a;
-        public static final int crime_list_item_titleTextView=0x7f05004b;
         public static final int decor_content_parent=0x7f05002f;
         public static final int default_activity_button=0x7f050024;
         public static final int dialog=0x7f050010;
@@ -1697,8 +1696,8 @@ containing a value of this type.
         public static final int listMode=0x7f050002;
         public static final int listView1=0x7f050040;
         public static final int list_item=0x7f050025;
-        public static final int list_item_crime=0x7f050049;
         public static final int middle=0x7f050013;
+        public static final int name=0x7f05004a;
         public static final int never=0x7f05000b;
         public static final int none=0x7f050004;
         public static final int normal=0x7f050001;
@@ -1783,7 +1782,7 @@ containing a value of this type.
         public static final int abc_simple_dropdown_hint=0x7f030015;
         public static final int activity_main=0x7f030016;
         public static final int activity_second=0x7f030017;
-        public static final int list_item_crime=0x7f030018;
+        public static final int student_layout=0x7f030018;
         public static final int support_simple_spinner_dropdown_item=0x7f030019;
     }
     public static final class menu {
