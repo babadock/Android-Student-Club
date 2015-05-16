@@ -43,10 +43,6 @@ public class MainActivity extends ActionBarActivity {
 
 		initListview();
 
-		adapter = new StudentAdapter(this, mStudents);
-		listView = (ListView) findViewById(R.id.listView1);
-		listView.setAdapter(adapter);
-
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, final View view,
@@ -138,15 +134,22 @@ public class MainActivity extends ActionBarActivity {
 				}
 			}
 		});
+
+		adapter = new StudentAdapter(this, mStudents);
+		listView = (ListView) findViewById(R.id.listView1);
+		listView.setAdapter(adapter);
 	}
 
-	protected void addPersonWith(String id, String student_id, String name,
-			String email, String avatar, Object object) {
-		// TODO Auto-generated method stub
+	protected void addPersonWith(String id, String studentid, String name,
+			String email, String avatar, String token) {
 		Student student = new Student();
 		student.setId(id);
 		student.setName(name);
-		// student.set
+		student.setStudentid(studentid);
+		student.setEmail(email);
+		student.setAvatar(avatar);
+		student.setToken(token);
+		mStudents.add(student);
 
 	}
 }
