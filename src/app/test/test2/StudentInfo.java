@@ -28,7 +28,6 @@ public class StudentInfo extends Activity{
 
 		saveButton = (Button) findViewById(R.id.button1);
 		saveButton.setOnClickListener(new View.OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub

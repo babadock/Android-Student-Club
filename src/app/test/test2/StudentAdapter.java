@@ -54,6 +54,8 @@ public class StudentAdapter extends BaseAdapter {
 			view = convertView;
 			holder = (ViewHolder) view.getTag();
 		}
+		Student student = mStudents.get(position);
+		holder.name.setText(student.getName());
 		return view;
 	}
 

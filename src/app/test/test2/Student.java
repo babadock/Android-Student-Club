@@ -7,6 +7,7 @@ public class Student {
 	private String name;
 	private String email;
 	private Bitmap avatar;
+	private String token;
 
 	public String getId() {
 		return id;
@@ -40,10 +41,19 @@ public class Student {
 		this.avatar = avatar;
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		String s = "" + this.name + " " + this.id;
 		return s;
 	}
+
 }
