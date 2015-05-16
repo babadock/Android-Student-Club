@@ -13,10 +13,6 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class MainActivity extends ActionBarActivity {
-	public static final String NAME = "app.test.test2.name";
-	public static final String ID = "app.test.test2.id";
-	public static final String EMAIL = "app.test.test2.email";
-	public static final String AVATAR = "app.test.test2.avatar";
 
 	protected static final String TAG = "From Main Activity";
 	protected static final int REQUEST_CODE = 0;
@@ -71,17 +67,31 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
+			String studentId = data.getStringExtra("id");
+			// String studentId = data.getStringExtra("studentId");
+			String name = data.getStringExtra("name");
+			String email = data.getStringExtra("email");
+			String avatar = data.getStringExtra("avatar");
+			String token = data.getStringExtra("token");
 			if (requestCode == 100) {
 				// Sign up
 				Log.i(TAG, "requestCode == 100");
 				Student newStudent = new Student();
-				newStudent.setName(data.getStringExtra(NAME));
-				newStudent.setAvatar(data.getStringExtra(AVATAR));
+				newStudent.setId(studentId);
+				newStudent.setName(name);
+				newStudent.setEmail(email);
+				newStudent.setAvatar(avatar);
+				newStudent.setToken(token);
 				// student.setName(data.getStringExtra(name));
 				mStudents.add(0, newStudent);
 				Log.i(TAG, "add success");
 			} else {
 				// Edit info
+				Student student = mStudents.get(positionEdited);
+				student.setId(studentId);
+				student.setName(name);
+				student.setEmail(email);
+				student.setAvatar(avatar);
 				Log.i(TAG, "requestCode == 200");
 			}
 		}

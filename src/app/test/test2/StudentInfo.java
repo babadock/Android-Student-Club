@@ -12,16 +12,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class StudentInfo extends Activity {
 	protected static final String TAG = "From second activity";
-	private EditText nameEditText;
+
 	private EditText idEditText;
+	private EditText nameEditText;
 	private EditText emailEditText;
+	private TextView titleTextView;
+
 	private Button saveButton;
 	private Button cancelButton;
 	private ImageView imgAvatar;
 	private String pathImage;
+	private Intent data;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,23 +36,63 @@ public class StudentInfo extends Activity {
 		idEditText = (EditText) findViewById(R.id.editText1);
 		nameEditText = (EditText) findViewById(R.id.editText2);
 		emailEditText = (EditText) findViewById(R.id.editText3);
-
-		saveButton = (Button) findViewById(R.id.button1);
+		titleTextView = (TextView) findViewById(R.id.textView1);
 		imgAvatar = (ImageView) findViewById(R.id.imgAvatar);
+		saveButton = (Button) findViewById(R.id.button1);
+		cancelButton = (Button) findViewById(R.id.button2);
 
+		data = getIntent();
+		if (data.getStringExtra("token") == null) {
+			// Sign up
+			titleTextView.setText("Add Student");
+			Log.i(TAG, "Sign up");
+		} else {
+			// Edit info
+			titleTextView.setText("Student Info");
+			saveButton.setVisibility(View.INVISIBLE);
+			cancelButton.setVisibility(View.INVISIBLE);
+
+			idEditText.setKeyListener(null);
+			idEditText.setCursorVisible(false);
+			idEditText.setPressed(false);
+			idEditText.setFocusable(false);
+
+			nameEditText.setKeyListener(null);
+			nameEditText.setCursorVisible(false);
+			nameEditText.setPressed(false);
+			nameEditText.setFocusable(false);
+
+			emailEditText.setKeyListener(null);
+			emailEditText.setCursorVisible(false);
+			emailEditText.setPressed(false);
+			emailEditText.setFocusable(false);
+
+			idEditText.setText(data.getStringExtra("id"));
+			nameEditText.setText(data.getStringExtra("name"));
+			emailEditText.setText(data.getStringExtra("email"));
+
+			// idEditText.setVisibility(View.INVISIBLE);
+			// idEditText.setActivated(activated)
+			// idEditText.setKeyListener(null);
+
+			/**
+			 * getStringExtra avatar ???
+			 */
+			Log.i(TAG, "Edit info");
+		}
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				Log.i(TAG, "save button has been clicked !!!");
 				Intent i = new Intent();
-				i.putExtra(MainActivity.ID, idEditText.getText().toString());
-				i.putExtra(MainActivity.NAME, nameEditText.getText().toString());
-				i.putExtra(MainActivity.EMAIL, emailEditText.getText()
-						.toString());
+				i.putExtra("id", idEditText.getText().toString());
+				i.putExtra("name", nameEditText.getText().toString());
+				i.putExtra("email", emailEditText.getText().toString());
 				if (pathImage != null) {
-					i.putExtra(MainActivity.AVATAR, pathImage);
+					i.putExtra("avatar", pathImage);
 				}
+				i.putExtra("token", "token");
 				setResult(RESULT_OK, i);
 				finish();
 			}
@@ -60,6 +105,15 @@ public class StudentInfo extends Activity {
 						Intent.ACTION_PICK,
 						android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 				startActivityForResult(i, 200);
+			}
+		});
+		cancelButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				// setResult(RESULT_CANCEL, i);
+				finish();
 			}
 		});
 	}
