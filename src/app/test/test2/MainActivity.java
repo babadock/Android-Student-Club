@@ -3,6 +3,10 @@ package app.test.test2;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -15,11 +19,6 @@ import android.widget.ListView;
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxCallback;
 import com.androidquery.callback.AjaxStatus;
-import com.androidquery.callback.BitmapAjaxCallback;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -58,6 +57,7 @@ public class MainActivity extends ActionBarActivity {
 				Intent editInfo = new Intent(MainActivity.this,
 						StudentInfo.class);
 				editInfo.putExtra("id", student.getId());
+				editInfo.putExtra("studentid", student.getStudentid());
 				editInfo.putExtra("name", student.getName());
 				editInfo.putExtra("email", student.getEmail());
 				editInfo.putExtra("avatar", student.getAvatar());
@@ -80,8 +80,8 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
-			String studentId = data.getStringExtra("id");
-			// String studentId = data.getStringExtra("studentId");
+			String id = data.getStringExtra("id");
+			String studentid = data.getStringExtra("studentid");
 			String name = data.getStringExtra("name");
 			String email = data.getStringExtra("email");
 			String avatar = data.getStringExtra("avatar");
@@ -90,7 +90,8 @@ public class MainActivity extends ActionBarActivity {
 				// Sign up
 				Log.i(TAG, "requestCode == 100");
 				Student newStudent = new Student();
-				newStudent.setId(studentId);
+				newStudent.setId(id);
+				newStudent.setStudentid(studentid);
 				newStudent.setName(name);
 				newStudent.setEmail(email);
 				newStudent.setAvatar(avatar);
@@ -101,7 +102,7 @@ public class MainActivity extends ActionBarActivity {
 			} else {
 				// Edit info
 				Student student = mStudents.get(positionEdited);
-				student.setId(studentId);
+				student.setId(studentid);
 				student.setName(name);
 				student.setEmail(email);
 				student.setAvatar(avatar);
@@ -124,11 +125,12 @@ public class MainActivity extends ActionBarActivity {
 						for (int i = 0; i < array.length(); i++) {
 							JSONObject student = array.getJSONObject(i);
 							String avatar = student.getString("avatar");
+							String student_id = student.getString("student_id");
 							String name = student.getString("name");
 							String email = student.getString("email");
-							String student_id = student.getString("student_id");
 							String id = student.getString("id");
-							addPersonWith(id, student_id, name, email, avatar, null);
+							addPersonWith(id, student_id, name, email, avatar,
+									null);
 						}
 					} catch (JSONException e) {
 						e.printStackTrace();
@@ -144,7 +146,7 @@ public class MainActivity extends ActionBarActivity {
 		Student student = new Student();
 		student.setId(id);
 		student.setName(name);
-		student.set
-		
+		// student.set
+
 	}
 }

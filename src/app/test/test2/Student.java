@@ -1,9 +1,9 @@
 package app.test.test2;
 
-import android.graphics.Bitmap;
 
 public class Student {
 	private String id;
+	private String studentid;
 	private String name;
 	private String email;
 	private String avatar;
@@ -47,6 +47,14 @@ public class Student {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getStudentid() {
+		return studentid;
+	}
+
+	public void setStudentid(String studentid) {
+		this.studentid = studentid;
 	}
 
 	@Override

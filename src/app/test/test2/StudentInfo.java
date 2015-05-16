@@ -28,6 +28,8 @@ public class StudentInfo extends Activity {
 	private String pathImage;
 	private Intent data;
 
+	private boolean test = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,28 +50,32 @@ public class StudentInfo extends Activity {
 			Log.i(TAG, "Sign up");
 		} else {
 			// Edit info
-			titleTextView.setText("Student Info");
-			saveButton.setVisibility(View.INVISIBLE);
-			cancelButton.setVisibility(View.INVISIBLE);
+			if (test) {
+				titleTextView.setText("Student Info");
+				saveButton.setVisibility(View.INVISIBLE);
+				cancelButton.setVisibility(View.INVISIBLE);
 
-			idEditText.setKeyListener(null);
-			idEditText.setCursorVisible(false);
-			idEditText.setPressed(false);
-			idEditText.setFocusable(false);
+				idEditText.setKeyListener(null);
+				idEditText.setCursorVisible(false);
+				idEditText.setPressed(false);
+				idEditText.setFocusable(false);
 
-			nameEditText.setKeyListener(null);
-			nameEditText.setCursorVisible(false);
-			nameEditText.setPressed(false);
-			nameEditText.setFocusable(false);
+				nameEditText.setKeyListener(null);
+				nameEditText.setCursorVisible(false);
+				nameEditText.setPressed(false);
+				nameEditText.setFocusable(false);
 
-			emailEditText.setKeyListener(null);
-			emailEditText.setCursorVisible(false);
-			emailEditText.setPressed(false);
-			emailEditText.setFocusable(false);
-			
-			//imgAvatar.setKeyListener(null);
-			
-			idEditText.setText(data.getStringExtra("id"));
+				emailEditText.setKeyListener(null);
+				emailEditText.setCursorVisible(false);
+				emailEditText.setPressed(false);
+				emailEditText.setFocusable(false);
+			} else {
+
+			}
+
+			// imgAvatar.setKeyListener(null);
+
+			idEditText.setText(data.getStringExtra("studentid"));
 			nameEditText.setText(data.getStringExtra("name"));
 			emailEditText.setText(data.getStringExtra("email"));
 
@@ -88,7 +94,7 @@ public class StudentInfo extends Activity {
 				// TODO Auto-generated method stub
 				Log.i(TAG, "save button has been clicked !!!");
 				Intent i = new Intent();
-				i.putExtra("id", idEditText.getText().toString());
+				i.putExtra("studentid", idEditText.getText().toString());
 				i.putExtra("name", nameEditText.getText().toString());
 				i.putExtra("email", emailEditText.getText().toString());
 				if (pathImage != null) {
