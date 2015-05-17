@@ -1,5 +1,12 @@
 package app.test.test2;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -13,9 +20,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.androidquery.AQuery;
+import com.androidquery.callback.AjaxCallback;
+import com.androidquery.callback.AjaxStatus;
 
 public class StudentInfo extends Activity {
 	protected static final String TAG = "From second activity";
+
+	AQuery aQuery = new AQuery(this);
+	final String urlAvatar = "http://api.routine.geekup.vn/uploads/";
+	final String urlRegister = "http://api.routine.geekup.vn/class/register";
+	final String urlUpdate = "http://api.routine.geekup.vn/students/";
 
 	private EditText idEditText;
 	private EditText nameEditText;
@@ -25,8 +42,15 @@ public class StudentInfo extends Activity {
 	private Button saveButton;
 	private Button cancelButton;
 	private ImageView imgAvatar;
-	private String pathImage;
 	private Intent data;
+
+	String token = null;
+	String id;
+	String studentId;
+	String name;
+	String email;
+	String avatar;
+	private String pathImage;
 
 	private boolean test = false;
 
@@ -44,7 +68,7 @@ public class StudentInfo extends Activity {
 		cancelButton = (Button) findViewById(R.id.button2);
 
 		data = getIntent();
-		if (data.getStringExtra("token") == null) {
+		if (data.getExtras() == null) {
 			// Sign up
 			titleTextView.setText("Add Student");
 			Log.i(TAG, "Sign up");
@@ -88,21 +112,71 @@ public class StudentInfo extends Activity {
 			 */
 			Log.i(TAG, "Edit info");
 		}
+		final Intent backdata = new Intent();
+
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Log.i(TAG, "save button has been clicked !!!");
-				Intent i = new Intent();
-				i.putExtra("studentid", idEditText.getText().toString());
-				i.putExtra("name", nameEditText.getText().toString());
-				i.putExtra("email", emailEditText.getText().toString());
+				studentId = idEditText.getText().toString();
+				name = nameEditText.getText().toString();
+				email = emailEditText.getText().toString();
+				Map<String, Object> params = new HashMap<String, Object>();
+				params.put("student_id", studentId);
+				params.put("name", name);
+				params.put("email", email);
 				if (pathImage != null) {
-					i.putExtra("avatar", pathImage);
+					params.put("avatar", new File(pathImage));
 				}
-				i.putExtra("token", "token");
-				setResult(RESULT_OK, i);
-				finish();
+				if (token == null) {
+					// signup
+					aQuery.ajax(urlRegister, params, JSONObject.class,
+							new AjaxCallback<JSONObject>() {
+								@Override
+								public void callback(String url,
+										JSONObject object, AjaxStatus status) {
+									// TODO Auto-generated method stub
+									if (object != null) {
+										try {
+											Boolean result = object
+													.getBoolean("success");
+											if (result) {
+												JSONObject student = object
+														.getJSONObject("student");
+												token = student
+														.getString("token");
+												avatar = student
+														.getString("avatar");
+												Toast.makeText(
+														getApplicationContext(),
+														"Success",
+														Toast.LENGTH_SHORT)
+														.show();
+												backdata.putExtra("id", id);
+												backdata.putExtra("studentId",
+														studentId);
+												backdata.putExtra("name", name);
+												backdata.putExtra("email",
+														email);
+												backdata.putExtra("token",
+														token);
+												backdata.putExtra("avatar",
+														avatar);
+												setResult(RESULT_OK, backdata);
+												finish();
+											} else {
+												Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
+		                                        return;
+											}
+										} catch (JSONException e) {
+											// TODO: handle exception
+											 e.printStackTrace();
+										}
+									}
+									super.callback(url, object, status);
+								}
+							});
+				}
 			}
 		});
 		imgAvatar.setOnClickListener(new View.OnClickListener() {
