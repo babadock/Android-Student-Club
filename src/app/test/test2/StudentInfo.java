@@ -93,24 +93,13 @@ public class StudentInfo extends Activity {
 				emailEditText.setCursorVisible(false);
 				emailEditText.setPressed(false);
 				emailEditText.setFocusable(false);
-			} else {
-
 			}
-
-			// imgAvatar.setKeyListener(null);
-
 			idEditText.setText(data.getStringExtra("studentid"));
 			nameEditText.setText(data.getStringExtra("name"));
 			emailEditText.setText(data.getStringExtra("email"));
 
-			// idEditText.setVisibility(View.INVISIBLE);
-			// idEditText.setActivated(activated)
-			// idEditText.setKeyListener(null);
-
-			/**
-			 * getStringExtra avatar ???
-			 */
-			Log.i(TAG, "Edit info");
+			/*aQuery.id(imgAvatar).image(urlAvatar + avatar, true, true, 0,
+					R.drawable.defautl_avatar);*/
 		}
 		final Intent backdata = new Intent();
 
@@ -165,12 +154,16 @@ public class StudentInfo extends Activity {
 												setResult(RESULT_OK, backdata);
 												finish();
 											} else {
-												Toast.makeText(getApplicationContext(), "Fail", Toast.LENGTH_SHORT).show();
-		                                        return;
+												Toast.makeText(
+														getApplicationContext(),
+														"Fail",
+														Toast.LENGTH_SHORT)
+														.show();
+												return;
 											}
 										} catch (JSONException e) {
 											// TODO: handle exception
-											 e.printStackTrace();
+											e.printStackTrace();
 										}
 									}
 									super.callback(url, object, status);
